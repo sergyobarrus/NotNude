@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="lib/img/favicon.png">
+
+        <title>NotNude</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="lib/css/bootstrap.css" rel="stylesheet">
+
+
+        <!-- Custom styles for this template -->
+        <link href="lib/css/main.css" rel="stylesheet">
+
+        <!-- Fonts from Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+
+        <!-- JavaScripts-->
+        <script src="lib/js/build.js"></script>
+        <script>
+            var Dropzone = require("enyo-dropzone");
+            Dropzone.autoDiscover = false;
+        </script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Tooltip on right</button>
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand fontLobster" href="#"><b>NotNude</b> - Tratamento de imagem (Nudez)</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Saiba Mais</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div id="headerwrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="fontLobster">O <b class="titleOrange">NotNude</b> utiliza algoritmos de tratamento de imagem para inferir se a mesma possui nudez ou não!</h1>
+                        <!--<a href="#Modal1" class="btn btn-warning btn-lg" data-toggle="modal">Acessar</a>-->
+                        <a href="#container" class="btn btn-warning btn-lg">Acessar</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-responsive" src="lib/img/ipad-hand.png" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Analisador-->
+        <div class="container" id="container">
+
+            <div id="actions" class="row">
+
+                <div class="col-lg-7">
+                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Adcionar Arquivo</span>
+                    </span>
+                    <button type="submit" class="btn btn-primary start">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>Iniciar Upload</span>
+                    </button>
+                    <button type="reset" class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancelar Upload</span>
+                    </button>
+                </div>
+
+                <div class="col-lg-5">
+                    <!-- The global file processing state -->
+                    <span class="fileupload-process">
+                        <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="table table-striped" class="files" id="previews">
+
+                <div id="template" class="file-row">
+                    <!-- This is used as the file preview template -->
+                    <div>
+                        <span class="preview img-thumbnail"><img id ="imageNude" width="400" height="400" data-dz-thumbnail /></span>
+                    </div>
+                    <div>
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                    </div>
+                    <div>
+                        <p class="size" data-dz-size></p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary start">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Iniciar</span>
+                        </button>
+                        <button data-dz-remove class="btn btn-warning cancel">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Cancelar</span>
+                        </button>
+                        <button onclick="clearInterface()" data-dz-remove class="btn btn-danger delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span>Deletar</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><b>Resultado da Análise:</b></h1>
+                </div>
+                <div class="panel-body">
+                    <p id="result"></p>
+                    <p id="resultface"></p>
+                    <div>
+                        <div id="followingBallsG">
+                            <div id="followingBallsG_1" class="followingBallsG"></div>
+                            <div id="followingBallsG_2" class="followingBallsG"></div>
+                            <div id="followingBallsG_3" class="followingBallsG"></div>
+                            <div id="followingBallsG_4" class="followingBallsG"></div>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Analisador-->
+
+        <div id="headerwraptec">
+            <div class="row mt centered">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h1 class="fontLobster">Tecnologias utilizadas pelo <b>NotNude</b>!</h1>
+                    <h3>Para realizar o presente estudo fez-se necessárias as seguintes tecnologias...</h3>
+                </div>
+            </div><!-- /row -->
+
+            <!-- CAROUSEL -->
+            <div class="row mt centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="col-lg-offset-2">
+                                    <img class="ajustImag" src="lib/img/p01.png" alt="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="align-center tooltip-examples">
+                                        <i class="fa fa-code fa-5x mar-bot20"></i>
+
+                                        <h2><a href="http://www.patrick-wied.at/static/nudejs/" target="blank" class="label label-danger" data-toggle="tooltip" title="Saiba mais!" data-placement="right">NudeJS</a></h2>
+                                        <!--<a class="btn btn-default teste" role="button" href="http://www.patrick-wied.at/static/nudejs/" target="blank">Saiba mais..</a>-->
+                                        <p class="text-bold">O <b>Nude.js</b> é uma implementação de JavaScript de um scanner de nudez com base em abordagens de 
+                                            trabalhos de pesquisa. Utiliza HTMLCanvas tornando possível analisar os dados de imagens e inferir se a imagem possui nudez ou não.
+                                            <br/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-lg-offset-1">
+                                    <img class="ajustImag" src="lib/img/p02.png" alt="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="align-center tooltip-examples">
+                                        <i class="fa fa-code fa-5x mar-bot20"></i>
+                                        <!--                                        <h2><span class="label label-warning">DropzoneJS</span></h2>-->
+                                        <h2><a href="http://www.dropzonejs.com/" target="blank" class="label label-warning">DropzoneJS</a></h2>
+
+                                        <p class="text-bold">O <b>DropzoneJS</b> é uma biblioteca de código aberto que possibilita envio (upload) de arquivos com visualização de imagens.
+                                            Desta forma, permite que os usuarios selecinem suas imagens para que o <b>NotNude</b> analise-as.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-lg-offset-2">
+                                    <img class="ajustImag" src="lib/img/p03.png" alt="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="align-center">
+                                        <i class="fa fa-code fa-5x mar-bot20"></i>
+                                        <!--<h2><span class="label label-success">FaceDetectionJS</span></h2>-->
+                                        <h2><a href="http://facedetection.jaysalvat.com/" target="blank" class="label label-success">FaceDetectionJS</a></h2>
+                                        <p class="text-bold">O <b>FaceDetectionJS</b> consiste em um plugin jQuery capaz de detectar rostos em fotos (Imagens), no qual observa as regiões 
+                                            dos olhos, nariz e boca para inferir se na imagem, possui ou não um rosto. 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left resetBorder carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right resetBorder carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="headerwrapdet">
+
+            <div class="container">
+                <div class="row mt centered">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="fontLobster">Como funciona a análise do <b>NotNude</b>?</h1>
+                        <h3>O processo de análise se divide em 3 etapas sendo elas...</h3>
+                    </div>
+                    <div class="row mt centered">
+                        <div class="col-lg-4">
+                            <img  src="lib/img/p05.png" alt="Regioes de pele">
+                            <h2 class="fontLobster">Regiões de pele</h2>
+                            <h4 class="lineText">Esta primeira etapa consiste em verificar quais são as três maiores regiões de pele da imagem</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <img  src="lib/img/p06.png" alt="Poligono Delimitador">
+                            <h2 class="fontLobster">Polígono Delimitador</h2>
+                            <h4 class="lineText"> A segunda etapa consiste em indetificar o canto inferior esquerdo, superior esquerdo, superior direito, inferior direito (pixels)
+                                e depois conectá-los para o determinar o "polígono delimitador". Os pixels dentro destes limites são importantes 
+                                para as duas novas condições possíveis para a deteção de nudez</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <img  src="lib/img/p07.png" alt="Inferencia do resultado">
+                            <h2 class="fontLobster">Inferência do resultado</h2>
+                            <h4 class="lineText"> Após o algoritmo indentificar as três maiores regiões de pele, e as extremidade da imagem, o algoritmo baseado nas porcentagens
+                                e resutaltos apuradas durante o processo de análise (cálculo dos pixels) inferi se a imagem possui nudez ou não</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="headerwrapFunc">
+            <div class="row mt centered">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h1 class="fontLobster">Como funciona o <b>NotNude</b>?</h1>
+                    <h3>O motor de análise de nudez (NudeJS) obsersa a exposição de pele presente na imagem fornecida para 
+                        inferir se há nudez ou não, partindo do seguinte processo..</h3>
+                </div>
+                <div class="col-lg-3 col-lg-offset-3">
+                    <img class="ajustImag" src="lib/img/p04.png" alt="">
+                </div>
+                <div class="col-lg-4">
+                    <i class="fa fa-code fa-5x mar-bot20"></i>
+                    <p id="infoFunc">"Se a contagem de pele total for inferior a 30% do número total de pixels na imagem e 
+                        o número de pixels de pele dentro do polígono delimitador for inferior a 55% do tamanho do 
+                        polígono, a imagem não possui nudez"
+                        <br/><br/>No entanto...<br/><br/>
+                        "Se o número de regiões de pele for maior que 60% e a intensidade média dentro do polígono for inferior 
+                        a 0,25%, a imagem não possui nudez."</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="headerwrapMembers">
+            <div class="row mt centered">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h1 class="fontLobster">Membros do Projeto <b>NotNude</b>!</h1>
+                    <h3>Quem são as pessoas que estão envolvidas neste projeto?</h3>
+                </div>
+            </div><!-- /row -->
+
+            <div class="row mt centered">
+                <div class="col-lg-4">
+                    <img class="img-circle ajustImgMembers" src="lib/img/pic1.jpg" width="140" alt="">
+                    <h3 class="fontLobster">Sérgio Silva Barros</h3>
+                    <p>Acadêmico do Curso de Sistema de Informação
+                        <br/>Centro Universitário Luterano de Palmas
+                        <br/>Palmas - TO</p>
+                    <h3><a href="https://www.facebook.com/sergyobarrus/" target="blank" class="label label-danger">Saiba mais!</a></h3>
+                </div>
+
+                <div class="col-lg-4">
+                    <img class="img-circle ajustImgMembers" src="lib/img/pic2.jpg" width="140" alt="">
+                    <h3 class="fontLobster">Gabriel Gusmão</h3>
+                    <p>Acadêmico do Curso de Sistema de Informação
+                        <br/>Centro Universitário Luterano de Palmas
+                        <br/>Palmas - TO</p>
+                    <h3><a href="https://www.facebook.com/gcsgpp/" target="blank" class="label label-danger">Saiba mais!</a></h3>
+                </div>
+
+                <div class="col-lg-4">
+                    <img class="img-circle ajustImgMembers" src="lib/img/pic3.jpg" width="140" alt="">
+                    <h3 class="fontLobster">Silas Gonçalves</h3>
+                    <p>Acadêmico do Curso de Sistema de Informação
+                        <br/>Centro Universitário Luterano de Palmas
+                        <br/>Palmas - TO</p>
+                    <h3><a href="https://www.facebook.com/silasgon" target="blank" class="label label-danger">Saiba mais!</a></h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="headerwrapEmail">
+            <div class="row mt centered">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h1 class="fontLobster">Fale com a equipe do projeto <b>NotNude</b>?</h1>
+                    <h3>Ficou interessado sobre o projeto, encontre em contato conosco!</h3>
+                </div>
+            </div>
+            <form class="form-inline centered" role="form">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Informe seu e-mail">
+                </div>
+                <button type="submit" class="btn btn-warning btn-lg">Enviar</button>
+            </form>
+        </div>
+
+        <div id="headerwrapRod">
+            <div class="row mt centered">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <!--                    <h1 class="fontLobster">Sobre o <b>NotNude</b>?</h1>-->
+                    <h3 class="ajustRodText">Projeto realizado na Disciplina de <b>Computaçao Gráfica</b> sob a orientação do <br/><b>Profº Jackson Gomes</b></h3>
+                    <h4 class="ajustRodText">Centro Universitário Luterano de Palmas / Palmas-TO</h4>
+                    <div id="ajustTextDir" class=" text-center">
+                        © Copyright 2014 NotNude
+                    </div>
+                    <a id="totop" class="btn ftbtn2 sttop" style="display: inline;"><img src="lib/img/backtotop.png"></a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modals -->
+        <div class="portfolio-modal modal fade" id="Modal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>Modal</h2>
+
+                                <br/>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Get the template HTML and remove it from the doument
+            var previewNode = document.querySelector("#template");
+            previewNode.id = "";
+            var previewTemplate = previewNode.parentNode.innerHTML;
+            previewNode.parentNode.removeChild(previewNode);
+
+            var myDropzone = new Dropzone(document.body, {// Make the whole body a dropzone
+                url: "http://www.torrentplease.com/dropzone.php", // Set the url
+                thumbnailWidth: 400,
+                thumbnailHeight: 400,
+                parallelUploads: 1,
+                previewTemplate: previewTemplate,
+                autoQueue: false, // Make sure the files aren't queued until manually added
+                previewsContainer: "#previews", // Define the container to display the previews
+                clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+
+            });
+
+            myDropzone.on("addedfile", function(file) {
+                // Hookup the start button
+                clearInterface();
+                file.previewElement.querySelector(".start").onclick = function() {
+                    myDropzone.enqueueFile(file);
+                };
+            });
+
+            myDropzone.on("sending", function(file) {
+                // Show the total progress bar when upload starts
+                document.querySelector("#total-progress").style.opacity = "1";
+                // And disable the start button
+                file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+            });
+
+            // Update the total progress bar
+            myDropzone.on("totaluploadprogress", function(progress) {
+                document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+            });
+
+            // Hide the total progress bar when nothing's uploading anymore
+            myDropzone.on("queuecomplete", function(progress) {
+                document.querySelector("#total-progress").style.opacity = "0";
+                verificarNudez();
+            });
+
+            // Setup the buttons for all transfers
+            // The "add files" button doesn't need to be setup because the config
+            // `clickable` has already been specified.
+            document.querySelector("#actions .start").onclick = function() {
+                myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+                clearInterface();
+            };
+            document.querySelector("#actions .cancel").onclick = function() {
+                myDropzone.removeAllFiles(true);
+                clearInterface();
+            };
+
+            //Verificar Nudez
+            function verificarNudez() {
+                document.getElementById('followingBallsG').style.display = 'none';
+                var img = document.getElementById("imageNude");
+                //                console.log("Node.js");
+                //                console.log("'" + img.id + "'");
+
+                nude.load(img.id);
+                nude.scan(function(result) {
+                    if (!result) {
+                        document.getElementById('result').innerHTML = '<h1><span class="label label-success">Não possui Nudez!!</span></h1>';
+                    } else {
+                        document.getElementById('result').innerHTML = '<h1><span class="label label-danger">Possui Nudez!!</span></h1>';
+                    }
+                });
+                verificarFace();
+            }
+            ;
+
+            //Verificar Rostos
+            function verificarFace() {
+                console.log('VerficarFace');
+                var img = document.getElementById("imageNude");
+                //                var coords = $('#'+img.id).faceDetection();
+                //                console.log('#'+img.id);
+                //                console.log(coords);
+                //                var $this = $(this);
+
+                var coords = $('#' + img.id).faceDetection({
+                    complete: function() {
+                        console.log('Verificaçao de Rosto completada!');
+                        //                        $this.text('Done!');
+                    },
+                    error: function(img, code, message) {
+                        console.log('Verificaçao de Rosto completada com ERRO!');
+                        alert('Error: ' + message);
+                    }
+                });
+                console.log(coords);
+                if (coords.length == 0) {
+                    document.getElementById('resultface').innerHTML = '<h2><span class="label label-warning">Não possui Rosto!!</span></h2>';
+                } else {
+                    if (coords.length == 1) {
+                        document.getElementById('resultface').innerHTML = '<h2><span class="label label-info">Foi detectado ' + coords.length + ' Rosto</span></h2>';
+                    } else {
+                        document.getElementById('resultface').innerHTML = '<h2><span class="label label-info">Foram detectados ' + coords.length + ' Rostos</span></h2>';
+                    }
+                    for (var i = 0; i < coords.length; i++) {
+                        $('<div>', {
+                            'class': 'face',
+                            'css': {
+                                'position': 'absolute',
+                                'left': coords[i].positionX + 'px',
+                                'top': coords[i].positionY + 'px',
+                                'width': coords[i].width + 'px',
+                                'height': coords[i].height + 'px'
+                            }
+                        })
+                                .appendTo('#result');
+                    }
+                }
+            }
+            ;
+
+            function clearInterface() {
+                document.getElementById('result').innerHTML = '';
+                document.getElementById('resultface').innerHTML = '';
+                document.getElementById('followingBallsG').style.display = 'block';
+            }
+            ;
+
+        </script>
+
+        <!-- please download excanvas if you use ie -->
+        <!--[if IE]>
+        <script type="text/javascript" src="excanvas.js"></script>	
+        <![endif]-->
+        <script src="lib/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <!--Face Detect-->
+        <script src="lib/facedetection/ccv.js" type="text/javascript"></script>
+        <script src="lib/js/jquery.facedetection.js" type="text/javascript"></script>
+        <script src="lib/facedetection/face.js" type="text/javascript"></script>
+        <!--Nude Detect-->
+        <script src="lib/js/worker.nude.js" type="text/javascript"></script>
+        <script src="lib/js/nude.js" type="text/javascript"></script>
+        <script src="lib/js/noworker.nude.js" type="text/javascript"></script>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="lib/js/bootstrap.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".tooltip-examples a").tooltip('show');
+            });
+        </script>
+
+
+        <!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+                <script src="../lib/js/bootstrap.min.js"></script>-->
+    </body>
+</html>

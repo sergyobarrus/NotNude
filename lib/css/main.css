@@ -1,0 +1,310 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07/09/2014, 16:55:11
+    Author     : Sergyo Barrus
+*/
+
+html, body {
+    height: 100%;
+}
+#actions {
+    margin: 2em 0;
+}
+/* Mimic table appearance */
+div.table {
+    display: table;
+}
+div.table .file-row {
+    display: table-row;
+}
+div.table .file-row > div {
+    display: table-cell;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+div.table .file-row:nth-child(odd) {
+    background: #f9f9f9;
+}
+/* The total progress gets shown by event listeners */
+#total-progress {
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+/* Hide the progress bar when finished */
+#previews .file-row.dz-success .progress {
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+/* Hide the delete button initially */
+#previews .file-row .delete {
+    display: none;
+}
+/* Hide the start and cancel buttons and show the delete button */
+#previews .file-row.dz-success .start,
+#previews .file-row.dz-success .cancel {
+    display: none;
+}
+#previews .file-row.dz-success .delete {
+    display: block;
+}
+.face {
+    border:2px solid #FFF;
+}
+.faceBorder {
+    border: none;
+}
+
+
+/*
+ * Author: Carlos Alvarez
+ * URL: http://alvarez.is
+ *
+ * Project Name: FLATTY - Free Bootstrap 3 Theme
+ * Version: 1.0
+ * URL: http://blacktie.co
+ */
+
+body {
+    background-color: #f2f2f2;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Titles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #333;
+}
+
+.fontLobster{
+    font-family: 'Lobster', cursive;  
+}
+
+.titleOrange{
+    color: #F7C073;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+#infoFunc{
+    color: #fff !important;
+    font-size: 22pt !important;
+    font-family: Lobster;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #3498db;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.navbar-default {
+    background: url(../img/gplaypattern.png);
+    background-color: #565656;
+    border: none;
+    box-shadow: -1px 1px 25px #838383;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+/* Helpers */
+
+.mt {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.form-control {
+    height: 42px;
+    font-size: 18px;
+    width: 280px;
+}
+
+i {
+    margin: 8px;
+    color: #3498db; 
+}
+
+
+/* HeaderWrap */
+#headerwrap {
+    background: url(../img/gplaypattern.png);
+    background-repeat: repeat;
+    background-color: #3498db;
+    margin-top: -20px;
+    padding-top: 115px;
+    min-height: 650px;
+    width: 100%;   
+}
+
+#headerwraptec {
+    background: url(../img/gplaypattern.png);
+    background-color: #D3D3D3;
+    margin-top: 40px;
+    padding-top: 20px;
+    background-position: center center;
+    min-height: 610px;
+    width: 100%;
+}
+
+#headerwrapdet {
+    background: url(../img/gplaypattern.png);
+    background-color: #eda161;
+    margin-top: -40px;
+    padding-top: 20px;
+    background-position: center center;
+    min-height: 620px;
+    width: 100%;
+}
+
+#headerwrapFunc {
+    background: url(../img/gplaypattern.png);
+    background-color: #8DB88D;
+    margin-top: -40px;
+    padding-top: 20px;
+    background-position: center center;
+    min-height: 650px;
+    width: 100%;
+}
+#headerwrapMembers {
+    background: url(../img/gplaypattern.png);
+    background-color: #E39479;
+    margin-top: -40px;
+    padding-top: 20px;
+    background-position: center center;
+    min-height: 650px;
+    width: 100%;
+}
+#headerwrapEmail {
+    background: url(../img/gplaypattern.png);
+    background-color: #609B9D;
+    margin-top: -40px;
+    padding-top: 20px;
+    background-position: center center;
+    min-height: 350px;
+    width: 100%;
+}
+#headerwrapRod {
+    background: url(../img/gplaypattern.png);
+    background-color: #565656;
+    margin-top: -40px;
+    padding-top: 0px;
+    background-position: center center;
+    min-height: 160px;
+    width: 100%;
+}
+
+.resetBorder{
+    background-image: none !important;
+}
+
+.lineText{
+    line-height: 30px;
+}
+
+.ajustImag{
+    display: inline !important;
+    float: left;
+}
+.ajustImgMembers{
+    border-radius: 50% !important;
+    box-shadow: 10px 10px 70px #411303;
+    padding: 5px;
+    background-color: #80584B;
+}
+.ajustRodText{
+    color: #999;
+    font-size: 14pt;
+}
+#ajustTextDir{
+    color: #999;
+    font-size: 10pt;
+}
+
+#headerwrap h1 {
+    margin-top: 60px;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 45px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/*Icon Botton*/
+
+#totop {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    display: none;
+}
+.ftbtn2 {
+    background-color: #f1c40f;
+    color: #fff !important;
+    box-shadow: 0px 3px 0px #f1c40f;
+}
+
+/*Loading CSS*/
+
+#followingBallsG{position:relative;width:256px;height:20px;}.followingBallsG{background-color:#000000;position:absolute;top:0;left:0;width:20px;height:20px;-moz-border-radius:10px;-moz-animation-name:bounce_followingBallsG;-moz-animation-duration:2.5s;-moz-animation-iteration-count:infinite;-moz-animation-direction:linear;-webkit-border-radius:10px;-webkit-animation-name:bounce_followingBallsG;-webkit-animation-duration:2.5s;-webkit-animation-iteration-count:infinite;-webkit-animation-direction:linear;-ms-border-radius:10px;-ms-animation-name:bounce_followingBallsG;-ms-animation-duration:2.5s;-ms-animation-iteration-count:infinite;-ms-animation-direction:linear;-o-border-radius:10px;-o-animation-name:bounce_followingBallsG;-o-animation-duration:2.5s;-o-animation-iteration-count:infinite;-o-animation-direction:linear;border-radius:10px;animation-name:bounce_followingBallsG;animation-duration:2.5s;animation-iteration-count:infinite;animation-direction:linear;}#followingBallsG_1{-moz-animation-delay:0s;}#followingBallsG_1{-webkit-animation-delay:0s;}#followingBallsG_1{-ms-animation-delay:0s;}#followingBallsG_1{-o-animation-delay:0s;}#followingBallsG_1{animation-delay:0s;}#followingBallsG_2{-moz-animation-delay:0.25s;-webkit-animation-delay:0.25s;-ms-animation-delay:0.25s;-o-animation-delay:0.25s;animation-delay:0.25s;}#followingBallsG_3{-moz-animation-delay:0.5s;-webkit-animation-delay:0.5s;-ms-animation-delay:0.5s;-o-animation-delay:0.5s;animation-delay:0.5s;}#followingBallsG_4{-moz-animation-delay:0.75s;-webkit-animation-delay:0.75s;-ms-animation-delay:0.75s;-o-animation-delay:0.75s;animation-delay:0.75s;}@-moz-keyframes bounce_followingBallsG{0%{left:0px;background-color:#000000;}50%{left:236px;background-color:#FFFFFF;}100%{left:0px;background-color:#000000;}}@-webkit-keyframes bounce_followingBallsG{0%{left:0px;background-color:#000000;}50%{left:236px;background-color:#FFFFFF;}100%{left:0px;background-color:#000000;}}@-ms-keyframes bounce_followingBallsG{0%{left:0px;background-color:#000000;}50%{left:236px;background-color:#FFFFFF;}100%{left:0px;background-color:#000000;}}@-o-keyframes bounce_followingBallsG{0%{left:0px;background-color:#000000;}50%{left:236px;background-color:#FFFFFF;}100%{left:0px;background-color:#000000;}}@keyframes bounce_followingBallsG{0%{left:0px;background-color:#000000;}50%{left:236px;background-color:#FFFFFF;}100%{left:0px;background-color:#000000;}}
