@@ -36,9 +36,7 @@
     </head>
 
     <body>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Tooltip on right</button>
-
-        <!-- Fixed navbar -->
+         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -57,7 +55,7 @@
             </div>
         </div>
 
-        <div id="headerwrap">
+        <div id="headerwrap" name="headerwrap">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -341,30 +339,72 @@
                     <h3>Ficou interessado sobre o projeto, encontre em contato conosco!</h3>
                 </div>
             </div>
-            <form class="form-inline centered" role="form">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Informe seu e-mail">
-                </div>
-                <button type="submit" class="btn btn-warning btn-lg">Enviar</button>
-            </form>
+            <div id="formContact" class="col-md-6 col-md-offset-3">
+                <form id="form-contact" method="POST" action="email.php" role="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group name-group">
+                                <!-- <label for="name">Nome Completo</label> -->
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Informe seu nome completo" tabindex="1" required >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group email-group">
+                                <!-- <label for="email">Email</label> -->
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Informe seu email" tabindex="2" required >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group subject-group">
+                            <!-- <label for="subject">Assunto</label> -->
+                                <input type="text" name="subject" id="subject" class="form-control" placeholder="Informe o assunto" tabindex="3" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group subject-group">
+                            <!-- <label for="subject">Assunto</label> -->
+                                <textarea name="message" id="message" class="form-control" placeholder="informe sua mensagem" tabindex="4" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group email-group">
+                                <!-- <label for="email">Email</label> -->
+                                <button class="btn btn-default" name="submit" tabindex="4">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="msgSucesso" class="col-md-6 col-md-offset-3">
+                <div class="alert alert-success text-center">Sua mensagem foi enviada com sucesso.</div>
+            </div>
+            <div id="msgCarregando" class="col-md-6 col-md-offset-3">
+                <div class="alert alert-warning text-center">Aguarde! Sua mensagem esta sendo enviada...</div>
+            </div> 
+            <div id="msgFalha" class="col-md-6 col-md-offset-3">
+                <div class="alert alert-danger text-center">Houve um erro no envio, tente novamente mais tarde.</div>
+            </div>
+        </div>
+        </div>
         </div>
 
         <div id="headerwrapRod">
             <div class="row mt centered">
                 <div class="col-lg-6 col-lg-offset-3">
-                    <!--                    <h1 class="fontLobster">Sobre o <b>NotNude</b>?</h1>-->
+                    <!--<h1 class="fontLobster">Sobre o <b>NotNude</b>?</h1>-->
                     <h3 class="ajustRodText">Projeto realizado na Disciplina de <b>Computaçao Gráfica</b> sob a orientação do <br/><b>Profº Jackson Gomes</b></h3>
                     <h4 class="ajustRodText">Centro Universitário Luterano de Palmas / Palmas-TO</h4>
                     <div id="ajustTextDir" class=" text-center">
                         © Copyright 2014 NotNude
                     </div>
-                    <a id="totop" class="btn ftbtn2 sttop" style="display: inline;"><img src="lib/img/backtotop.png"></a>
+                    <a id="totop" href="#headerwrap" class="btn ftbtn2 sttop" style="display: inline;"><img src="lib/img/backtotop.png"></a>
                 </div>
             </div>
         </div>
 
-
-        <!-- Modals -->
+       <!-- Modals -->
         <div class="portfolio-modal modal fade" id="Modal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
                 <div class="close-modal" data-dismiss="modal">
@@ -461,8 +501,7 @@
                     }
                 });
                 verificarFace();
-            }
-            ;
+            };
 
             //Verificar Rostos
             function verificarFace() {
@@ -506,15 +545,13 @@
                                 .appendTo('#result');
                     }
                 }
-            }
-            ;
+            };
 
             function clearInterface() {
                 document.getElementById('result').innerHTML = '';
                 document.getElementById('resultface').innerHTML = '';
                 document.getElementById('followingBallsG').style.display = 'block';
-            }
-            ;
+            };
 
         </script>
 
@@ -531,6 +568,7 @@
         <script src="lib/js/worker.nude.js" type="text/javascript"></script>
         <script src="lib/js/nude.js" type="text/javascript"></script>
         <script src="lib/js/noworker.nude.js" type="text/javascript"></script>
+        <script src="lib/js/contact-form.js" type="text/javascript" ></script>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -539,12 +577,46 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                $(".tooltip-examples a").tooltip('show');
+                $('#msgSucesso').hide();
+                $('#msgCarregando').hide();
+                $('#msgFalha').hide();
+            });
+
+            $('#form-contact').submit(function(e){
+                var nome  = $('#name').val();
+                var email = $('#email').val();
+                var assunto = $('#subject').val();
+                var mensagem   = $('#message').val();
+
+                if(!nome == '' && !email == '' && !assunto == '' && !mensagem == ''){
+                    e.preventDefault();
+                    $.ajax({
+                        type:$(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(data){
+                        $('#form-contact').html(data); /* imprime o retorno no HTML */
+                            console.log(data);
+                        },
+                        beforeSend: function(){
+                            $('#formContact').hide();
+                            $('#msgCarregando').show();
+                        },
+                        error: function(err){
+                            $('#msgCarregando').hide();
+                            $('#msgSucesso').show();
+                            //console.log('failed');
+                            //console.log(err);
+                        }
+                    })
+                }else{
+                    alert('Por favor, preencha todos os campos do formulário.') ;
+                }
             });
         </script>
-
-
-        <!--        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-                <script src="../lib/js/bootstrap.min.js"></script>-->
+        <!--
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../lib/js/bootstrap.min.js"></script>-->
     </body>
 </html>
