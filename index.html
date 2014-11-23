@@ -495,9 +495,9 @@
                 nude.load(img.id);
                 nude.scan(function(result) {
                     if (!result) {
-                        document.getElementById('result').innerHTML = '<h1><span class="label label-success">Não possui Nudez!!</span></h1>';
+                        document.getElementById('result').innerHTML = '<h1><span class="label label-success">Possibilidade de nudez, não encontrada!!</span></h1>';
                     } else {
-                        document.getElementById('result').innerHTML = '<h1><span class="label label-danger">Possui Nudez!!</span></h1>';
+                        document.getElementById('result').innerHTML = '<h1><span class="label label-danger">Encontrada possibilidade de nudez!!</span></h1>';
                     }
                 });
                 verificarFace();
